@@ -1,0 +1,33 @@
+table '1 - TIPO PRESTADOR'
+	lineageTag: cb1e0c37-d3fc-4ca6-83b4-7a37116adb48
+
+	column CD_TIP_PRESTA
+		dataType: int64
+		formatString: 0
+		lineageTag: 79397860-295a-4d7a-ba8c-3414b6c98fdd
+		summarizeBy: none
+		sourceColumn: CD_TIP_PRESTA
+
+		annotation SummarizationSetBy = Automatic
+
+	column NM_TIP_PRESTA
+		dataType: string
+		lineageTag: 0ffc77d1-08f7-4f46-ab83-a00c80b886a5
+		summarizeBy: none
+		sourceColumn: NM_TIP_PRESTA
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '1 - TIPO PRESTADOR' = m
+		mode: import
+		queryGroup: BD
+		source =
+				let
+				    Fonte = Oracle.Database("5534db.cloudmv.com.br:1523/prd5534.db5534.mv5534vcn.oraclevcn.com", [Query="SELECT#(lf)CD_TIP_PRESTA#(lf), NM_TIP_PRESTA#(lf)#(lf)FROM#(lf)TIP_PRESTA", HierarchicalNavigation=true])
+				in
+				    Fonte
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

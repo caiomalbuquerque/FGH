@@ -1,0 +1,48 @@
+table '1_2 - SUB GRUPO'
+	lineageTag: 04246361-8140-4db5-976e-5c933e0317b7
+
+	column CD_GRUPO_PROCEDIMENTO
+		dataType: string
+		lineageTag: afb3f0c6-2d1e-450d-ad0f-b7b3ff239a3c
+		summarizeBy: none
+		sourceColumn: CD_GRUPO_PROCEDIMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CD_SUB_GRUPO_PROCEDIMENTO
+		dataType: string
+		lineageTag: 9542dad7-74da-4c23-a5b7-1e25061e0cde
+		summarizeBy: none
+		sourceColumn: CD_SUB_GRUPO_PROCEDIMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CD_GPO_SUBGPO
+		dataType: string
+		lineageTag: 0cd7f386-1d16-4aba-9178-31235eb4967c
+		summarizeBy: none
+		sourceColumn: CD_GPO_SUBGPO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DS_SUB_GRUPO_PROCEDIMENTO
+		dataType: string
+		lineageTag: d02425f8-2a16-4745-88af-f2925d36d393
+		summarizeBy: none
+		sourceColumn: DS_SUB_GRUPO_PROCEDIMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '1_2 - SUB GRUPO' = m
+		mode: import
+		queryGroup: BD
+		source =
+				let
+				    Fonte = Oracle.Database("5534db.cloudmv.com.br:1523/prd5534.db5534.mv5534vcn.oraclevcn.com", [Query="SELECT#(lf)      SGP.CD_GRUPO_PROCEDIMENTO#(lf)      , SGP.CD_SUB_GRUPO_PROCEDIMENTO#(lf)      , CONCAT(SGP.CD_GRUPO_PROCEDIMENTO, SGP.CD_SUB_GRUPO_PROCEDIMENTO) AS CD_GPO_SUBGPO#(lf)      , SGP.DS_SUB_GRUPO_PROCEDIMENTO#(lf)#(lf)FROM#(lf)      SUB_GRUPO_PROCEDIMENTOS SGP", HierarchicalNavigation=true])
+				in
+				    Fonte
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

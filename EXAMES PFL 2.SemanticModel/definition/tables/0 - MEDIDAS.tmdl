@@ -1,0 +1,53 @@
+table '0 - MEDIDAS'
+	lineageTag: c7580cd8-362e-41c0-a330-7a1d71c9af29
+
+	measure 'QTD FAT X PROD' = '2 - FATURAMENTO'[QTD FATURAMENTO] - '2 - PRODUCAO'[QTD PRODUÇÃO]
+		formatString: #,0
+		lineageTag: 3357d3ba-f6e1-4e84-ba2b-2c334b1499e1
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'QTD LAB X FAT' = '2 - LABORATORIO'[QTD LAB] - '2 - FATURAMENTO'[QTD FATURAMENTO]
+		formatString: #,0
+		lineageTag: 4c93004c-8aae-4c2c-a62c-a8d3a95d2438
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'QTD LAB X PROD' = '2 - LABORATORIO'[QTD LAB] - '2 - PRODUCAO'[QTD PRODUÇÃO]
+		formatString: #,0
+		lineageTag: 821280e5-0241-4fe7-bf1d-c2745a9d4f5b
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'R$ FAT X PROD' = '2 - FATURAMENTO'[VALOR SUS FATURAMENTO] - '2 - PRODUCAO'[VALOR SUS PRODUÇÃO]
+		lineageTag: ca178484-7cdd-4ead-8dd3-a7ef9c615ca7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'R$ LAB X FAT' = '2 - LABORATORIO'[VALOR LAB] - '2 - FATURAMENTO'[VALOR SUS FATURAMENTO]
+		lineageTag: 2fa621c9-ae9d-413c-bc10-fec0c66dab95
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'R$ LAB X PROD' = '2 - LABORATORIO'[VALOR LAB] - '2 - PRODUCAO'[VALOR SUS PRODUÇÃO]
+		lineageTag: b951a5d5-c6fd-4604-8b55-83ebdc8de600
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COLUNA1
+		isHidden
+		lineageTag: a3bbc091-90e9-4254-b322-d22c68ea351b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [COLUNA1]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '0 - MEDIDAS' = calculated
+		mode: import
+		source =
+				DATATABLE("COLUNA1", STRING,
+				{{"VAZIO"}})
+
+	annotation PBI_Id = 31a821163265436ba4bacf19392c1707
+

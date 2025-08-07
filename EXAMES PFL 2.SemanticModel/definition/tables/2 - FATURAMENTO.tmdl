@@ -1,0 +1,102 @@
+table '2 - FATURAMENTO'
+	lineageTag: f4cb5db0-a73c-41ec-adcc-22ad5d514e0e
+
+	measure 'QTD FATURAMENTO' = SUM('2 - FATURAMENTO'[QT_LANCADA])
+		formatString: #,0
+		lineageTag: e4852f55-2538-447c-bf07-0f725387e2f3
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'VALOR SUS FATURAMENTO' = ```
+			
+			SUMX(
+			SUMMARIZE('1 - PROCEDIMENTO VALOR', 
+			'1 - PROCEDIMENTO VALOR'[CD_PROCEDIMENTO], 
+			"total", 
+			[R$]*[QTD FATURAMENTO]),
+			[total]
+			)
+			```
+		lineageTag: 7fe09ca7-bea5-448b-9868-913434e121fe
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TIPO
+		dataType: string
+		lineageTag: 7b7ccfb1-719a-484b-ab01-a366cafdca3d
+		summarizeBy: none
+		sourceColumn: TIPO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DT_COMPETENCIA
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 55a162eb-e397-436c-8c7c-75ca9638089f
+		summarizeBy: none
+		sourceColumn: DT_COMPETENCIA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CD_PROCEDIMENTO
+		dataType: string
+		lineageTag: caf09b72-d10d-4526-871d-c772b6f3bbf6
+		summarizeBy: none
+		sourceColumn: CD_PROCEDIMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CD_MULTI_EMPRESA
+		dataType: int64
+		formatString: 0
+		lineageTag: d25ec473-c1c4-480e-b96b-f97e3b476717
+		summarizeBy: none
+		sourceColumn: CD_MULTI_EMPRESA
+
+		annotation SummarizationSetBy = Automatic
+
+	column QT_LANCADA
+		dataType: double
+		formatString: #,0
+		lineageTag: 4ae2f68a-8cee-4926-9295-6b173caed90e
+		summarizeBy: sum
+		sourceColumn: QT_LANCADA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column CD_PACIENTE
+		dataType: int64
+		formatString: 0
+		lineageTag: f3c12d0d-610d-4783-856f-14edb09c3675
+		summarizeBy: none
+		sourceColumn: CD_PACIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CD_PRESTADOR
+		dataType: int64
+		formatString: 0
+		lineageTag: c590b82b-f98d-4ba4-b957-d67024829b6d
+		summarizeBy: none
+		sourceColumn: CD_PRESTADOR
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '2 - FATURAMENTO' = m
+		mode: import
+		queryGroup: BD
+		source =
+				let
+				    Fonte = Oracle.Database("5534db.cloudmv.com.br:1523/prd5534.db5534.mv5534vcn.oraclevcn.com", [Query="SELECT #(lf)      TIPO#(lf)      , TO_CHAR(DT_COMPETENCIA, 'MM/YYYY') AS DT_COMPETENCIA#(lf)      , CD_PROCEDIMENTO#(lf)      , CD_PACIENTE#(lf)      , CD_PRESTADOR#(lf)      , CD_MULTI_EMPRESA#(lf)      , SUM(QT_LANCADA) AS QT_LANCADA#(lf)#(lf)FROM#(lf)#(lf)(#(lf)SELECT #(lf)      'SIA' AS TIPO#(lf)      ,A.DT_EVE_SIASUS AS DT_COMPETENCIA#(lf)      ,A.CD_PROCEDIMENTO#(lf)      ,A.CD_PACIENTE#(lf)      ,E.CD_PRESTADOR#(lf)      ,D.CD_SETOR AS CD_SETOR#(lf)      ,A.CD_MULTI_EMPRESA#(lf)      ,A.QT_LANCADA AS QT_LANCADA#(lf)#(lf)FROM #(lf)      EVE_SIASUS       A#(lf)      ,PROCEDIMENTO_SUS B#(lf)      ,SETOR            D#(lf)      ,PRESTADOR        E#(lf)#(lf)WHERE #(lf)      A.CD_PROCEDIMENTO = B.CD_PROCEDIMENTO#(lf)      AND A.CD_SETOR = D.CD_SETOR#(lf)      AND A.CD_PRESTADOR = E.CD_PRESTADOR#(lf)      --AND A.DT_EVE_SIASUS BETWEEN TO_DATE ('01/04/2025 00:00:00','DD/MM/YYYY hh24:mi:ss') #(lf)      --AND TO_DATE ('30/04/2025 23:59:59', 'DD/MM/YYYY hh24:mi:ss')#(lf)      --AND TO_CHAR(A.DT_EVE_SIASUS, 'MM/YYYY') = '05/2025'#(lf)#(lf)#(lf)UNION ALL#(lf)#(lf)#(lf)SELECT #(lf)      'SIH' AS TIPO#(lf)      ,DT_COMPETENCIA#(lf)      ,B.CD_PROCEDIMENTO#(lf)      ,G.CD_PACIENTE#(lf)      ,F.CD_PRESTADOR#(lf)      ,H.CD_SETOR AS CD_SETOR#(lf)      ,A.CD_MULTI_EMPRESA #(lf)      ,B.QT_LANCAMENTO AS QT_LANCADA#(lf)#(lf)FROM#(lf)      REG_FAT A#(lf)      ,ITREG_FAT B#(lf)      ,REMESSA_FATURA C#(lf)      ,FATURA D#(lf)      ,PROCEDIMENTO_SUS E#(lf)      ,PRESTADOR F#(lf)      ,ATENDIME G#(lf)      ,SETOR H#(lf)#(lf)                                                                  #(lf)WHERE #(lf)      A.CD_REG_FAT = B.CD_REG_FAT#(lf)      AND A.CD_ATENDIMENTO = G.CD_ATENDIMENTO#(lf)      AND A.CD_REMESSA = C.CD_REMESSA#(lf)      AND C.CD_FATURA = D.CD_FATURA#(lf)      AND B.CD_PROCEDIMENTO = E.CD_PROCEDIMENTO#(lf)      AND G.CD_PRESTADOR = F.CD_PRESTADOR#(lf)      AND B.CD_SETOR = H.CD_SETOR#(lf)      --AND DT_COMPETENCIA BETWEEN TO_DATE ('01/04/2025 00:00:00','DD/MM/YYYY hh24:mi:ss') #(lf)      --AND TO_DATE ('30/04/2025 23:59:59', 'DD/MM/YYYY hh24:mi:ss') #(lf)      #(lf))#(lf)#(lf)WHERE#(lf)CD_MULTI_EMPRESA IN (7, 14)#(lf)AND TO_CHAR(DT_COMPETENCIA, 'MM/YYYY') = '06/2025'#(lf)AND CD_PROCEDIMENTO LIKE '0202%'#(lf)#(lf)GROUP BY#(lf)      TIPO#(lf)      , TO_CHAR(DT_COMPETENCIA, 'MM/YYYY')#(lf)      ,CD_PACIENTE#(lf)      ,CD_PRESTADOR#(lf)      , CD_PROCEDIMENTO#(lf)      , CD_MULTI_EMPRESA#(lf)", HierarchicalNavigation=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"DT_COMPETENCIA", type date}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,42 @@
+table '1 - PRESTADOR'
+	lineageTag: 1b00ee45-1f0e-4efc-b168-9756e358e0a3
+
+	column CD_PRESTADOR
+		dataType: int64
+		formatString: 0
+		lineageTag: 65fdc705-4832-471d-82a5-51fb6bf7e0b4
+		summarizeBy: none
+		sourceColumn: CD_PRESTADOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column NM_PRESTADOR
+		dataType: string
+		lineageTag: 59f10a37-0e93-45ca-96b8-40d1bddf44a2
+		summarizeBy: none
+		sourceColumn: NM_PRESTADOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column CD_TIP_PRESTA
+		dataType: int64
+		formatString: 0
+		lineageTag: ba0fcca9-62f4-48b7-938d-73b99396b0ee
+		summarizeBy: none
+		sourceColumn: CD_TIP_PRESTA
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '1 - PRESTADOR' = m
+		mode: import
+		queryGroup: BD
+		source =
+				let
+				    Fonte = Oracle.Database("5534db.cloudmv.com.br:1523/prd5534.db5534.mv5534vcn.oraclevcn.com", [Query="SELECT#(lf)CD_PRESTADOR#(lf), NM_PRESTADOR#(lf), CD_TIP_PRESTA#(lf)#(lf)FROM#(lf)PRESTADOR", HierarchicalNavigation=true])
+				in
+				    Fonte
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

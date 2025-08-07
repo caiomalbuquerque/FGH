@@ -1,0 +1,34 @@
+table '1 - SETOR EXAME'
+	lineageTag: 4f71d9a8-b514-4b76-a919-729b2641db3f
+
+	column CD_SET_EXA
+		dataType: double
+		lineageTag: 008f8c54-1c4e-4866-9f1e-a325137ff8f8
+		summarizeBy: none
+		sourceColumn: CD_SET_EXA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NM_SET_EXA
+		dataType: string
+		lineageTag: 00400ba1-83aa-4092-82f9-3ac4541d79d5
+		summarizeBy: none
+		sourceColumn: NM_SET_EXA
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '1 - SETOR EXAME' = m
+		mode: import
+		queryGroup: BD
+		source =
+				let
+				    Fonte = Oracle.Database("5534db.cloudmv.com.br:1523/prd5534.db5534.mv5534vcn.oraclevcn.com", [Query="SELECT #(lf)CD_SET_EXA#(lf), NM_SET_EXA#(lf)#(lf)FROM#(lf)SET_EXA", HierarchicalNavigation=true])
+				in
+				    Fonte
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

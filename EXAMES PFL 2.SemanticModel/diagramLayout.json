@@ -1,0 +1,336 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 49.972121452244416,
+        "y": 484.34515553291857
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 106.36527345751517,
+            "y": 214.86278305254194
+          },
+          "nodeIndex": "CALENDARIO",
+          "nodeLineageTag": "a8225292-928d-4606-9870-4ba2f908928a",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1462.8854480862549,
+            "y": 1014.4981371130439
+          },
+          "nodeIndex": "0 - MEDIDAS",
+          "nodeLineageTag": "c7580cd8-362e-41c0-a330-7a1d71c9af29",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 780.30642113543161,
+            "y": 253.47389325217128
+          },
+          "nodeIndex": "2 - PRODUCAO",
+          "nodeLineageTag": "aaa2b924-91b5-445e-8919-1ffdce19d8d7",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 774.16692987078943,
+            "y": 535.25111885098988
+          },
+          "nodeIndex": "2 - FATURAMENTO",
+          "nodeLineageTag": "f4cb5db0-a73c-41ec-adcc-22ad5d514e0e",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 49.919417696189015,
+            "y": 1045.9292782668304
+          },
+          "nodeIndex": "1 - PROCEDIMENTO VALOR",
+          "nodeLineageTag": "8f2f9c25-d3a4-4aa4-9d6d-9af91e88405d",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 94.891327509669338,
+            "y": 452.93934653573422
+          },
+          "nodeIndex": "1 - PACIENTE",
+          "nodeLineageTag": "cabb0009-8142-4eab-a9a4-6f4e5ecd9d51",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 92.682507187526653,
+            "y": 664.34502460525675
+          },
+          "nodeIndex": "1 - PRESTADOR",
+          "nodeLineageTag": "1b00ee45-1f0e-4efc-b168-9756e358e0a3",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 64.281225151355557,
+            "y": 857.68480351177482
+          },
+          "nodeIndex": "1 - TIPO PRESTADOR",
+          "nodeLineageTag": "cb1e0c37-d3fc-4ca6-83b4-7a37116adb48",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 853.82871057977968,
+            "y": 1082.9269299057105
+          },
+          "nodeIndex": "2 - LABORATORIO",
+          "nodeLineageTag": "0905913e-199a-4e6c-a3ca-7f0fd0abb805",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 56.189224800796211,
+            "y": 1292.5654656254464
+          },
+          "nodeIndex": "1 - MULTI_EMPRESA",
+          "nodeLineageTag": "b5089b04-ea12-4332-a3cf-b837948895fd",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 2063.9449317872713,
+            "y": 664.60252080383668
+          },
+          "nodeIndex": "1_1 - GRUPO",
+          "nodeLineageTag": "8bf07f86-2b5c-4fe6-9388-1716280e6282",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 1794.1293943153335,
+            "y": 422.04307014619326
+          },
+          "nodeIndex": "1_2 - SUB GRUPO",
+          "nodeLineageTag": "04246361-8140-4db5-976e-5c933e0317b7",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 12
+        },
+        {
+          "location": {
+            "x": 1495.5618817725776,
+            "y": 682.58763158343561
+          },
+          "nodeIndex": "1_3 - ORGANIZA GRUPO PROCEDIMENTO",
+          "nodeLineageTag": "49acc72a-22ba-45c4-ad00-51f8c366a313",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 13
+        },
+        {
+          "location": {
+            "x": 769.35760508651106,
+            "y": 21.386268821178533
+          },
+          "nodeIndex": "1 - SETOR EXAME",
+          "nodeLineageTag": "4f71d9a8-b514-4b76-a919-729b2641db3f",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1157.9565062428583,
+            "y": 854.92716970096762
+          },
+          "nodeIndex": "1 - DISTINTO PROCEDIMENTO",
+          "nodeLineageTag": "5f8bdbbc-2afc-4379-bd9e-5b551338f608",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 62.434813364398714,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 1,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1043.0186906477045,
+            "y": 0
+          },
+          "nodeIndex": "1 - PROCEDIMENTO VALOR",
+          "nodeLineageTag": "8f2f9c25-d3a4-4aa4-9d6d-9af91e88405d",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 31.224481511838349
+          },
+          "nodeIndex": "1_1 - GRUPO",
+          "nodeLineageTag": "8bf07f86-2b5c-4fe6-9388-1716280e6282",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 336.25323269690227,
+            "y": 5.9586597597188735
+          },
+          "nodeIndex": "1_2 - SUB GRUPO",
+          "nodeLineageTag": "04246361-8140-4db5-976e-5c933e0317b7",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 679.28721260795112,
+            "y": 11.917319519437743
+          },
+          "nodeIndex": "1_3 - ORGANIZA GRUPO PROCEDIMENTO",
+          "nodeLineageTag": "49acc72a-22ba-45c4-ad00-51f8c366a313",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 1055.9411109666733,
+            "y": 595.21479883722213
+          },
+          "nodeIndex": "2 - FATURAMENTO",
+          "nodeLineageTag": "f4cb5db0-a73c-41ec-adcc-22ad5d514e0e",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 1419.3682290330869,
+            "y": 14.785190076223557
+          },
+          "nodeIndex": "2 - LABORATORIO",
+          "nodeLineageTag": "0905913e-199a-4e6c-a3ca-7f0fd0abb805",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 679.63780734837417,
+            "y": 289.12566872633226
+          },
+          "nodeIndex": "2 - PRODUCAO",
+          "nodeLineageTag": "aaa2b924-91b5-445e-8919-1ffdce19d8d7",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 1454.7814182265265,
+            "y": 377.45024341707978
+          },
+          "nodeIndex": "1 - DISTINTO PROCEDIMENTO",
+          "nodeLineageTag": "5f8bdbbc-2afc-4379-bd9e-5b551338f608",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "GRUPOS PROCEDIMENTO",
+      "zoomValue": 63.287087723234038,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

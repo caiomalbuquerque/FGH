@@ -1,0 +1,53 @@
+table '1 - PROCEDIMENTO VALOR'
+	lineageTag: 8f2f9c25-d3a4-4aa4-9d6d-9af91e88405d
+
+	measure R$ = SUM('1 - PROCEDIMENTO VALOR'[VL_SERVICO_AMBULATORIAL])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 6b6a42b4-e0ab-45bc-ad36-012a58dd525c
+
+	column CD_PROCEDIMENTO
+		dataType: string
+		lineageTag: a75e2b4c-367d-4383-9ad2-f8171e305939
+		summarizeBy: none
+		sourceColumn: CD_PROCEDIMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DS_PROCEDIMENTO
+		dataType: string
+		lineageTag: 6e2bc68c-b350-4df8-b635-c3cae919d5e5
+		summarizeBy: none
+		sourceColumn: DS_PROCEDIMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column VL_SERVICO_AMBULATORIAL
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 1818a0c7-f397-417d-8a8b-3a7a6403c637
+		summarizeBy: sum
+		sourceColumn: VL_SERVICO_AMBULATORIAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column CD_GPO_SUBGPO_ORG
+		dataType: string
+		lineageTag: 61ba6089-fbc6-4923-8124-61be21ec7121
+		summarizeBy: none
+		sourceColumn: CD_GPO_SUBGPO_ORG
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '1 - PROCEDIMENTO VALOR' = m
+		mode: import
+		queryGroup: BD
+		source =
+				let
+				    Fonte = Oracle.Database("5534db.cloudmv.com.br:1523/prd5534.db5534.mv5534vcn.oraclevcn.com", [Query="SELECT DISTINCT#(lf)A.CD_PROCEDIMENTO,#(lf)CONCAT(#(lf)      B.CD_GRUPO_PROCEDIMENTO, #(lf)      CONCAT(B.CD_SUB_GRUPO_PROCEDIMENTO, #(lf)      B.CD_ORGANIZA_GRUPO_PROCEDIMENTO)) AS CD_GPO_SUBGPO_ORG,#(lf)B.DS_PROCEDIMENTO,#(lf)VL_SERVICO_AMBULATORIAL #(lf) #(lf)FROM #(lf)PROCEDIMENTO_SUS_VALOR A, #(lf)PROCEDIMENTO_SUS B #(lf)#(lf)WHERE #(lf)A.CD_PROCEDIMENTO = B.CD_PROCEDIMENTO#(lf)AND A.CD_PROCEDIMENTO LIKE '02%'", HierarchicalNavigation=true])
+				in
+				    Fonte
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

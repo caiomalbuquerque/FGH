@@ -1,0 +1,24 @@
+table '1 - DISTINTO PROCEDIMENTO'
+	lineageTag: 5f8bdbbc-2afc-4379-bd9e-5b551338f608
+
+	column CD_PROCEDIMENTO
+		dataType: string
+		lineageTag: 37b71c60-f136-4ec7-a58f-4199d4238505
+		summarizeBy: none
+		sourceColumn: CD_PROCEDIMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '1 - DISTINTO PROCEDIMENTO' = m
+		mode: import
+		queryGroup: BD
+		source =
+				let
+				    Fonte = Oracle.Database("5534db.cloudmv.com.br:1523/prd5534.db5534.mv5534vcn.oraclevcn.com", [Query="SELECT DISTINCT#(lf)CD_PROCEDIMENTO#(lf)#(lf)FROM #(lf)PROCEDIMENTO_SUS#(lf)#(lf)WHERE #(lf)CD_PROCEDIMENTO LIKE '02%'", HierarchicalNavigation=true])
+				in
+				    Fonte
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,36 @@
+table '1 - MULTI_EMPRESA'
+	lineageTag: b5089b04-ea12-4332-a3cf-b837948895fd
+
+	column CD_MULTI_EMPRESA
+		dataType: int64
+		formatString: 0
+		lineageTag: c3101d60-51cc-44f4-b77a-1f5d0676bcf6
+		summarizeBy: none
+		sourceColumn: CD_MULTI_EMPRESA
+
+		annotation SummarizationSetBy = Automatic
+
+	column DS_MULTI_EMPRESA
+		dataType: string
+		lineageTag: 542099b1-7e67-4a80-862a-ef62457e045c
+		summarizeBy: none
+		sourceColumn: DS_MULTI_EMPRESA
+		sortByColumn: CD_MULTI_EMPRESA
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '1 - MULTI_EMPRESA' = m
+		mode: import
+		queryGroup: BD
+		source =
+				let
+				    Fonte = Oracle.Database("5534db.cloudmv.com.br:1523/prd5534.db5534.mv5534vcn.oraclevcn.com", [Query="SELECT#(lf)CD_MULTI_EMPRESA#(lf), DS_MULTI_EMPRESA#(lf)#(lf)FROM#(lf)MULTI_EMPRESAS#(lf)#(lf)ORDER BY#(lf)1", HierarchicalNavigation=true])
+				in
+				    Fonte
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

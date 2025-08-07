@@ -1,0 +1,132 @@
+table '2 - PRODUCAO'
+	lineageTag: aaa2b924-91b5-445e-8919-1ffdce19d8d7
+
+	measure 'QTD PRODUÇÃO' = SUM( '2 - PRODUCAO'[QTD])
+		formatString: #,0
+		lineageTag: 7ef4b399-6852-418e-984b-60ea8e61a7b4
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'VALOR SUS PRODUÇÃO' = ```
+			
+			SUMX(
+			SUMMARIZE('1 - PROCEDIMENTO VALOR', 
+			'1 - PROCEDIMENTO VALOR'[CD_PROCEDIMENTO], 
+			"total", 
+			[R$]*'2 - PRODUCAO'[QTD PRODUÇÃO]),
+			[total]
+			)
+			```
+		lineageTag: 113945c6-18b1-4132-afbd-08dcad3d7efe
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DT_LAUDO
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6f6d720e-1209-491b-8f3f-a2e055641476
+		summarizeBy: none
+		sourceColumn: DT_LAUDO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CD_MULTI_EMPRESA
+		dataType: int64
+		formatString: 0
+		lineageTag: 3c7d754a-2815-47cd-9e7d-6a08b25161a0
+		summarizeBy: none
+		sourceColumn: CD_MULTI_EMPRESA
+
+		annotation SummarizationSetBy = Automatic
+
+	column QTD
+		dataType: double
+		formatString: #,0
+		lineageTag: 9092d87e-f0df-4bda-8fd7-fce4c0fb3528
+		summarizeBy: sum
+		sourceColumn: QTD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column CD_EXA_LAB
+		dataType: int64
+		formatString: 0
+		lineageTag: a60fa40a-1eb1-4d6d-bd83-e8e2781cb238
+		summarizeBy: sum
+		sourceColumn: CD_EXA_LAB
+
+		annotation SummarizationSetBy = Automatic
+
+	column CD_SETOR
+		dataType: int64
+		formatString: 0
+		lineageTag: e917b2ba-0758-4626-beff-41deb84f6bf3
+		summarizeBy: sum
+		sourceColumn: CD_SETOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column CD_PROCEDIMENTO
+		dataType: string
+		lineageTag: 06168631-2dba-4dbb-acbe-527d9e1f12dc
+		summarizeBy: none
+		sourceColumn: CD_PROCEDIMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CD_PED_LAB
+		dataType: int64
+		formatString: 0
+		lineageTag: b05e8d49-c1a1-47fe-a1e3-54250dc64307
+		summarizeBy: sum
+		sourceColumn: CD_PED_LAB
+
+		annotation SummarizationSetBy = Automatic
+
+	column CD_PRESTADOR
+		dataType: int64
+		formatString: 0
+		lineageTag: 79db03c3-237e-4a0c-89f5-498b20e306b0
+		summarizeBy: none
+		sourceColumn: CD_PRESTADOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column CD_PACIENTE
+		dataType: int64
+		formatString: 0
+		lineageTag: 7e4f7690-839b-492c-9fe2-12e477706865
+		summarizeBy: none
+		sourceColumn: CD_PACIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CD_SET_EXA
+		dataType: double
+		lineageTag: 730c4963-340a-4fbf-91d5-315ed596f913
+		summarizeBy: none
+		sourceColumn: CD_SET_EXA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition '2 - PRODUCAO' = m
+		mode: import
+		queryGroup: BD
+		source =
+				let
+				    Fonte = Oracle.Database("5534db.cloudmv.com.br:1523/prd5534.db5534.mv5534vcn.oraclevcn.com", [Query="SELECT #(lf)      CD_EXA_LAB    #(lf)      , CD_PED_LAB          #(lf)      , CD_PRESTADOR#(lf)      , CD_PACIENTE             #(lf)      , TO_CHAR(DT_LAUDO, 'MM/YYYY') AS DT_LAUDO              #(lf)      , CD_SETOR#(lf)      , CD_SET_EXA                            #(lf)      , CD_MULTI_EMPRESA        #(lf)      , cd_procedimento#(lf)      , COUNT(*) AS QTD#(lf)#(lf)FROM#(lf)(#(lf)-- EXAMES REALIZADOS#(lf)SELECT  #(lf)      EL.CD_EXA_LAB#(lf)      , IL.CD_PED_LAB#(lf)      , PL.CD_PRESTADOR#(lf)      , A.CD_PACIENTE                      #(lf)      , IL.DT_LAUDO              #(lf)      , PL.CD_SETOR#(lf)      , IL.CD_SET_EXA             #(lf)      , ME.CD_MULTI_EMPRESA       #(lf)      , CASE#(lf)        WHEN a.tp_atendimento IN('I')         THEN NVL(el.cd_procedimento_sih, el.cd_procedimento_sia)#(lf)        WHEN a.tp_atendimento IN('A','E','U') THEN NVL(el.cd_procedimento_sia, el.cd_procedimento_sih)#(lf)      END AS cd_procedimento#(lf)      --, TO_CHAR(IL.DT_LAUDO,'MM/YYYY') AS MES_ANO_DT_LAUDO#(lf)      --, EL.NM_EXA_LAB #(lf)      --, TO_CHAR(IL.DT_LAUDO,'DD')AS DIA#(lf)      --, SE.NM_SET_EXA               #(lf)      --, S.NM_SETOR  #(lf)#(lf)FROM           #(lf)      PED_LAB PL#(lf)      , ITPED_LAB IL#(lf)      , EXA_LAB EL#(lf)      , SETOR S#(lf)      , MULTI_EMPRESAS ME#(lf)      , ATENDIME A#(lf)      , SET_EXA SE#(lf)#(lf)WHERE   #(lf)      IL.CD_PED_LAB = PL.CD_PED_LAB #(lf)      AND IL.CD_EXA_LAB = EL.CD_EXA_LAB (+)#(lf)      AND PL.CD_SETOR = S.CD_SETOR (+)#(lf)      AND SE.CD_SET_EXA (+) = IL.CD_SET_EXA#(lf)      AND PL.CD_MULTI_EMPRESA = ME.CD_MULTI_EMPRESA (+)#(lf)      AND NVL(IL.SN_REALIZADO,'N') = 'S'#(lf)      AND A.CD_ATENDIMENTO = PL.CD_ATENDIMENTO#(lf)#(lf)      UNION ALL#(lf)#(lf)-- EXAMES SECUNDARIOS REALIZADOS #(lf)SELECT#(lf)      EL.CD_EXA_LAB   #(lf)      , IL.CD_PED_LAB #(lf)      , PL.CD_PRESTADOR#(lf)      , A.CD_PACIENTE                      #(lf)      , IL.DT_LAUDO              #(lf)      , PL.CD_SETOR#(lf)      , IL.CD_SET_EXA           #(lf)      , ME.CD_MULTI_EMPRESA       #(lf)      , CASE#(lf)        WHEN a.tp_atendimento IN('I')         THEN NVL(el.cd_procedimento_sih, el.cd_procedimento_sia)#(lf)        WHEN a.tp_atendimento IN('A','E','U') THEN NVL(el.cd_procedimento_sia, el.cd_procedimento_sih)#(lf)      END AS cd_procedimento#(lf)      --, TO_CHAR(IL.DT_LAUDO,'MM/YYYY') AS MES_ANO_DT_LAUDO#(lf)      --, EL.NM_EXA_LAB #(lf)      --, TO_CHAR(IL.DT_LAUDO,'DD')AS DIA#(lf)      --, SE.NM_SET_EXA               #(lf)      --, S.NM_SETOR #(lf)#(lf)FROM   #(lf)      PED_LAB PL#(lf)      , ITPED_LAB IL#(lf)      , EXA_LAB EL#(lf)      , GERMES_CULTURA GC #(lf)      , SETOR S#(lf)      , MULTI_EMPRESAS ME#(lf)      , ATENDIME A#(lf)      , SET_EXA SE#(lf)#(lf)WHERE #(lf)      IL.CD_PED_LAB = IL.CD_PED_LAB#(lf)      AND GC.cd_exa_lab_fatura = EL.CD_EXA_LAB#(lf)      AND NVL(IL.SN_REALIZADO,'N') = 'S'#(lf)      AND GC.cd_ped_lab = PL.CD_PED_LAB#(lf)      AND GC.cd_exa_lab = IL.CD_EXA_LAB#(lf)      AND GC.cd_itped_lab = IL.cd_itped_lab#(lf)      AND PL.CD_SETOR = S.CD_SETOR#(lf)      AND SE.CD_SET_EXA (+) = IL.CD_SET_EXA#(lf)      AND PL.CD_MULTI_EMPRESA = ME.CD_MULTI_EMPRESA#(lf)      AND GC.cd_exa_lab_fatura is not null#(lf)      AND A.CD_ATENDIMENTO = PL.CD_ATENDIMENTO#(lf))#(lf)#(lf)WHERE#(lf)CD_MULTI_EMPRESA IN (7, 14)#(lf)AND TO_CHAR(DT_LAUDO, 'MM/YYYY') = '06/2025'#(lf)--AND CD_EXA_LAB IN (1160,328,329)#(lf)#(lf)GROUP BY#(lf)      CD_EXA_LAB #(lf)      , CD_PED_LAB           #(lf)      , CD_PRESTADOR#(lf)      , CD_PACIENTE              #(lf)      , DT_LAUDO              #(lf)      , CD_SETOR#(lf)      , CD_SET_EXA                            #(lf)      , CD_MULTI_EMPRESA        #(lf)      , cd_procedimento", HierarchicalNavigation=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"DT_LAUDO", type date}}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Tipo Alterado",{{"QTD", "QTD"}})
+				in
+				    #"Colunas Renomeadas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

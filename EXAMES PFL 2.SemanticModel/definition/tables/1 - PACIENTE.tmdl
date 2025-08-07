@@ -1,0 +1,33 @@
+table '1 - PACIENTE'
+	lineageTag: cabb0009-8142-4eab-a9a4-6f4e5ecd9d51
+
+	column CD_PACIENTE
+		dataType: int64
+		formatString: 0
+		lineageTag: 3223db99-3b37-45db-a993-220014dc0030
+		summarizeBy: none
+		sourceColumn: CD_PACIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column NM_PACIENTE
+		dataType: string
+		lineageTag: 11cd4239-21e8-4bf2-97b2-1be9c45608dc
+		summarizeBy: none
+		sourceColumn: NM_PACIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '1 - PACIENTE' = m
+		mode: import
+		queryGroup: BD
+		source =
+				let
+				    Fonte = Oracle.Database("5534db.cloudmv.com.br:1523/prd5534.db5534.mv5534vcn.oraclevcn.com", [Query="SELECT#(lf)P.CD_PACIENTE#(lf), P.NM_PACIENTE#(lf)#(lf)FROM#(lf)PACIENTE P#(lf), ATENDIME A#(lf)#(lf)WHERE#(lf)A.CD_PACIENTE = P.CD_PACIENTE#(lf)AND TO_CHAR(A.DT_ATENDIMENTO, 'MM/YYYY') = '06/2025'", HierarchicalNavigation=true])
+				in
+				    Fonte
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

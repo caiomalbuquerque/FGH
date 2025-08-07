@@ -1,0 +1,32 @@
+table '1_1 - GRUPO'
+	lineageTag: 8bf07f86-2b5c-4fe6-9388-1716280e6282
+
+	column CD_GRUPO_PROCEDIMENTO
+		dataType: string
+		lineageTag: b315705c-dba3-44e0-8321-dbe90891ebd6
+		summarizeBy: none
+		sourceColumn: CD_GRUPO_PROCEDIMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DS_GRUPO_PROCEDIMENTO
+		dataType: string
+		lineageTag: 508dd608-af02-45ca-84ae-b05a6d2ec99b
+		summarizeBy: none
+		sourceColumn: DS_GRUPO_PROCEDIMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '1_1 - GRUPO' = m
+		mode: import
+		queryGroup: BD
+		source =
+				let
+				    Fonte = Oracle.Database("5534db.cloudmv.com.br:1523/prd5534.db5534.mv5534vcn.oraclevcn.com", [Query="SELECT#(lf)      GP.CD_GRUPO_PROCEDIMENTO#(lf)      , GP.DS_GRUPO_PROCEDIMENTO#(lf)#(lf)FROM#(lf)      GRUPO_PROCEDIMENTOS GP", HierarchicalNavigation=true])
+				in
+				    Fonte
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

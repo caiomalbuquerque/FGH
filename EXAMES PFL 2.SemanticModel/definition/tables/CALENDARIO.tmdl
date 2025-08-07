@@ -1,0 +1,22 @@
+table CALENDARIO
+	lineageTag: a8225292-928d-4606-9870-4ba2f908928a
+
+	column DATA
+		formatString: General Date
+		lineageTag: a95cd0c6-9e89-4e77-a0cf-e02a32e8accc
+		summarizeBy: none
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: 937369ab-424a-4476-bd0b-2c89d642bee2
+			defaultHierarchy: LocalDateTable_066d9938-8bf8-45d4-9b7e-2d1afca09254.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition CALENDARIO = calculated
+		mode: import
+		source = CALENDAR(DATE(2025,01,01), DATE(2025,12,31))
+
+	annotation PBI_Id = 72814d2217184774a23f524d71d05f24
+

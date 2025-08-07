@@ -1,0 +1,114 @@
+relationship 0af5c622-baa7-4f16-bc92-6e3785bba018
+	joinOnDateBehavior: datePartOnly
+	fromColumn: '2 - LABORATORIO'.DATACADASTRO
+	toColumn: LocalDateTable_049b66bf-f3b3-4d4a-ad7d-812e3a70dac5.Date
+
+relationship b9c84c8f-4e8f-4be4-a40c-e620560e5101
+	joinOnDateBehavior: datePartOnly
+	fromColumn: '2 - LABORATORIO'.DATACOLETA
+	toColumn: LocalDateTable_3ac25a56-b7f9-4a97-bad0-a59ee77a058f.Date
+
+relationship AutoDetected_22cadfda-cd4d-4f7a-940c-e0319e3af1d4
+	fromColumn: '2 - PRODUCAO'.CD_PRESTADOR
+	toColumn: '1 - PRESTADOR'.CD_PRESTADOR
+
+relationship AutoDetected_3b4f1be5-2edc-4760-a979-8ede7fd616f1
+	fromColumn: '2 - FATURAMENTO'.CD_PRESTADOR
+	toColumn: '1 - PRESTADOR'.CD_PRESTADOR
+
+relationship 9a67df54-37c3-9d01-4335-86a63d63ce94
+	toCardinality: many
+	fromColumn: '2 - FATURAMENTO'.CD_PACIENTE
+	toColumn: '1 - PACIENTE'.CD_PACIENTE
+
+relationship 8f2f3283-1d2e-636c-4636-87708cb72b84
+	toCardinality: many
+	fromColumn: '2 - PRODUCAO'.CD_PACIENTE
+	toColumn: '1 - PACIENTE'.CD_PACIENTE
+
+relationship 9f8838b5-f4c8-e03a-fa07-1bb4fe5ab169
+	toCardinality: many
+	fromColumn: '2 - LABORATORIO'.NM_PRESTADOR
+	toColumn: '1 - PRESTADOR'.NM_PRESTADOR
+
+relationship AutoDetected_5d3ec3db-e7d1-4653-b5f7-d8ebb3e39766
+	fromColumn: '1 - PRESTADOR'.CD_TIP_PRESTA
+	toColumn: '1 - TIPO PRESTADOR'.CD_TIP_PRESTA
+
+relationship AutoDetected_70bfdcb4-22d4-459e-99e5-1f0c8ebfcb6a
+	fromColumn: '2 - PRODUCAO'.CD_MULTI_EMPRESA
+	toColumn: '1 - MULTI_EMPRESA'.CD_MULTI_EMPRESA
+
+relationship AutoDetected_a1153418-a468-45fa-8f60-29c631c996f3
+	fromColumn: '2 - FATURAMENTO'.CD_MULTI_EMPRESA
+	toColumn: '1 - MULTI_EMPRESA'.CD_MULTI_EMPRESA
+
+relationship AutoDetected_c05eace2-383a-4548-847b-f29c1f34362e
+	crossFilteringBehavior: bothDirections
+	fromColumn: '2 - LABORATORIO'.CD_MULTI_EMPRESA
+	toColumn: '1 - MULTI_EMPRESA'.CD_MULTI_EMPRESA
+
+relationship 648efc3e-2492-214f-3f88-031dd0a84422
+	toCardinality: many
+	fromColumn: '2 - LABORATORIO'.NM_PACIENTE
+	toColumn: '1 - PACIENTE'.NM_PACIENTE
+
+relationship 937369ab-424a-4476-bd0b-2c89d642bee2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: CALENDARIO.DATA
+	toColumn: LocalDateTable_066d9938-8bf8-45d4-9b7e-2d1afca09254.Date
+
+relationship 0c621f3f-c639-257c-9091-55e3fa2a95a6
+	fromColumn: '2 - PRODUCAO'.DT_LAUDO
+	toColumn: CALENDARIO.DATA
+
+relationship a36e2a4f-038a-5fb8-2725-573448920672
+	fromColumn: '2 - FATURAMENTO'.DT_COMPETENCIA
+	toColumn: CALENDARIO.DATA
+
+relationship 4e882a0f-7840-0c88-95b9-f8e7dd53dceb
+	fromColumn: '2 - LABORATORIO'.LIBERACAOLAUDO
+	toColumn: CALENDARIO.DATA
+
+relationship AutoDetected_b46a9ffe-864c-49c8-9f5a-bd42ec8efe80
+	crossFilteringBehavior: bothDirections
+	fromColumn: '1_2 - SUB GRUPO'.CD_GRUPO_PROCEDIMENTO
+	toColumn: '1_1 - GRUPO'.CD_GRUPO_PROCEDIMENTO
+
+relationship AutoDetected_0b21dbc2-fcf5-4997-a83c-aaf0f6f154dd
+	crossFilteringBehavior: bothDirections
+	fromColumn: '1_3 - ORGANIZA GRUPO PROCEDIMENTO'.CD_GPO_SUBGPO
+	toColumn: '1_2 - SUB GRUPO'.CD_GPO_SUBGPO
+
+relationship 66a4f31f-77b1-787c-351e-fc064c58e3df
+	crossFilteringBehavior: bothDirections
+	fromColumn: '2 - PRODUCAO'.CD_SET_EXA
+	toColumn: '1 - SETOR EXAME'.CD_SET_EXA
+
+relationship e46c8b66-d71a-2501-dfcb-10ad21320a81
+	crossFilteringBehavior: bothDirections
+	fromColumn: '1 - PROCEDIMENTO VALOR'.CD_GPO_SUBGPO_ORG
+	toColumn: '1_3 - ORGANIZA GRUPO PROCEDIMENTO'.CD_GPO_SUBGPO_ORG
+
+relationship 78fa6e0e-09c3-1682-860e-18eea5401965
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromColumn: '2 - LABORATORIO'.CD_PROCEDIMENTO
+	toColumn: '1 - DISTINTO PROCEDIMENTO'.CD_PROCEDIMENTO
+
+relationship 2dcd31eb-a1ca-e1cf-7042-46fe395c320e
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromColumn: '2 - PRODUCAO'.CD_PROCEDIMENTO
+	toColumn: '1 - DISTINTO PROCEDIMENTO'.CD_PROCEDIMENTO
+
+relationship 8a8fd62d-0694-61b7-687d-60f126703308
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromColumn: '2 - FATURAMENTO'.CD_PROCEDIMENTO
+	toColumn: '1 - DISTINTO PROCEDIMENTO'.CD_PROCEDIMENTO
+
+relationship 1e0fe8c2-9e7d-5624-ad88-bc39d039707f
+	fromColumn: '1 - PROCEDIMENTO VALOR'.CD_PROCEDIMENTO
+	toColumn: '1 - DISTINTO PROCEDIMENTO'.CD_PROCEDIMENTO
+

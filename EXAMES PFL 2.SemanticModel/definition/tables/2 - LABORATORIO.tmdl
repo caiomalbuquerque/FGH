@@ -1,0 +1,327 @@
+table '2 - LABORATORIO'
+	lineageTag: 0905913e-199a-4e6c-a3ca-7f0fd0abb805
+
+	measure 'VALOR LAB' = SUM('2 - LABORATORIO'[VLLIQUIDO])
+		lineageTag: 7af1767c-95b8-4894-a913-5654812078f3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'QTD LAB' = COUNTROWS('2 - LABORATORIO')
+		formatString: #,0
+		lineageTag: 7d8882c2-0b88-4777-9baa-254d1117a7c5
+
+	measure 'VALOR UNITARIO LAB' = [VALOR LAB]/[QTD LAB]
+		lineageTag: 3fe78515-58ae-4919-a524-d58ee0d548e7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SIGLAUNIDADE
+		dataType: string
+		lineageTag: fb16f5f6-a5d3-484d-8857-5650c290b2e7
+		summarizeBy: none
+		sourceColumn: SIGLAUNIDADE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CODPOSTO
+		dataType: int64
+		formatString: 0
+		lineageTag: bbd1915f-6703-4979-9727-0796718356cc
+		summarizeBy: sum
+		sourceColumn: CODPOSTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DESCRPOSTO
+		dataType: string
+		lineageTag: 6ce89863-21dd-423d-beec-93259e08c2ce
+		summarizeBy: none
+		sourceColumn: DESCRPOSTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATACADASTRO
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 15a42c8c-ca40-4fe2-aecc-4b1d5a86dbea
+		summarizeBy: none
+		sourceColumn: DATACADASTRO
+
+		variation Variation
+			isDefault
+			relationship: 0af5c622-baa7-4f16-bc92-6e3785bba018
+			defaultHierarchy: LocalDateTable_049b66bf-f3b3-4d4a-ad7d-812e3a70dac5.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DATACOLETA
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7fecb7f1-6e22-499a-afdb-decde9d94029
+		summarizeBy: none
+		sourceColumn: DATACOLETA
+
+		variation Variation
+			isDefault
+			relationship: b9c84c8f-4e8f-4be4-a40c-e620560e5101
+			defaultHierarchy: LocalDateTable_3ac25a56-b7f9-4a97-bad0-a59ee77a058f.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column REQUISICAO
+		dataType: int64
+		formatString: 0
+		lineageTag: 2fcb352a-408e-4b86-adc8-0f502b217e72
+		summarizeBy: sum
+		sourceColumn: REQUISICAO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CD_PEDIDO
+		dataType: int64
+		formatString: 0
+		lineageTag: d773339b-3859-4602-95c4-fa440768b997
+		summarizeBy: sum
+		sourceColumn: CD_PEDIDO
+
+		annotation SummarizationSetBy = Automatic
+
+	column REQUISICAOAT
+		dataType: int64
+		formatString: 0
+		lineageTag: eef198f7-e0c5-4817-a0e1-3dc1235e90de
+		summarizeBy: sum
+		sourceColumn: REQUISICAOAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column CD_ITEM_PEDIDO
+		dataType: int64
+		formatString: 0
+		lineageTag: 09a40ab5-b0f9-430a-8ad1-4890a8cc9abb
+		summarizeBy: sum
+		sourceColumn: CD_ITEM_PEDIDO
+
+		annotation SummarizationSetBy = Automatic
+
+	column NUMGUIA
+		dataType: int64
+		formatString: 0
+		lineageTag: c303cc5b-dd1e-441d-aeda-eb27a6366a15
+		summarizeBy: sum
+		sourceColumn: NUMGUIA
+
+		annotation SummarizationSetBy = Automatic
+
+	column NM_PACIENTE
+		dataType: string
+		lineageTag: bd813ecb-fc33-4637-9249-00b69e7c250c
+		summarizeBy: none
+		sourceColumn: NM_PACIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CD_PACIENTE
+		dataType: string
+		lineageTag: 06133066-0455-459c-b9a9-9d7d221844a2
+		summarizeBy: none
+		sourceColumn: CD_PACIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CODCID
+		dataType: string
+		lineageTag: 4a71141d-d5fe-486b-8a1f-e5da116c404a
+		summarizeBy: none
+		sourceColumn: CODCID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DESCRCID
+		dataType: string
+		lineageTag: 0d3dc062-87f2-41c6-a9f5-2439a8a3bc6f
+		summarizeBy: none
+		sourceColumn: DESCRCID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ESTADOPROF
+		dataType: string
+		lineageTag: cb0fe4f1-9931-4ad1-a424-11ac1037ab1b
+		summarizeBy: none
+		sourceColumn: ESTADOPROF
+
+		annotation SummarizationSetBy = Automatic
+
+	column CD_PRESTADOR
+		dataType: string
+		lineageTag: a25d8dcb-2553-4655-af07-7b81536b73df
+		summarizeBy: none
+		sourceColumn: CD_PRESTADOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column NM_PRESTADOR
+		dataType: string
+		lineageTag: 3379c298-3464-4d25-bd4a-004e1ffd9a99
+		summarizeBy: none
+		sourceColumn: NM_PRESTADOR
+
+		annotation SummarizationSetBy = Automatic
+
+	column SIGLAEXAME
+		dataType: string
+		lineageTag: e27e6e35-c4f9-485f-a4d7-edc270e93ea7
+		summarizeBy: none
+		sourceColumn: SIGLAEXAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column TABELA
+		dataType: string
+		lineageTag: 204f3e9f-3382-43bb-aee7-366944aa5556
+		summarizeBy: none
+		sourceColumn: TABELA
+
+		annotation SummarizationSetBy = Automatic
+
+	column CD_PROCEDIMENTO
+		dataType: string
+		lineageTag: b67dde05-01ae-4080-b0cd-e19958b89bac
+		summarizeBy: none
+		sourceColumn: CD_PROCEDIMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DESCREXAME
+		dataType: string
+		lineageTag: 1e873fc1-0981-4fdc-b764-98b4170220f5
+		summarizeBy: none
+		sourceColumn: DESCREXAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column LIBERACAOLAUDO
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ce8a4138-1a61-4788-ad8b-94641e270bd7
+		summarizeBy: none
+		sourceColumn: LIBERACAOLAUDO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CODIGOEMS
+		dataType: int64
+		formatString: 0
+		lineageTag: d253fabb-8ff1-4f6f-844c-7822caa5faaa
+		summarizeBy: sum
+		sourceColumn: CODIGOEMS
+
+		annotation SummarizationSetBy = Automatic
+
+	column SISTEMAEXTERNO
+		dataType: string
+		lineageTag: a5b1d321-c115-4fd3-b714-5fc69cd72a2d
+		summarizeBy: none
+		sourceColumn: SISTEMAEXTERNO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SOLICITACAOEXTERNA
+		dataType: int64
+		formatString: 0
+		lineageTag: 1757123c-cb49-4825-acc5-4a5bbce225ed
+		summarizeBy: sum
+		sourceColumn: SOLICITACAOEXTERNA
+
+		annotation SummarizationSetBy = Automatic
+
+	column CODIGOEXTERNO
+		dataType: int64
+		formatString: 0
+		lineageTag: c507d207-af3d-458f-84b2-74add068f215
+		summarizeBy: sum
+		sourceColumn: CODIGOEXTERNO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CODSTATUSEXAME
+		dataType: int64
+		formatString: 0
+		lineageTag: 9ce461fb-7ec0-4229-9b53-2ef24ba12f67
+		summarizeBy: sum
+		sourceColumn: CODSTATUSEXAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column CODPERFECHAMENTO
+		dataType: int64
+		formatString: 0
+		lineageTag: 5315ee68-3f24-4213-86b1-f5f1b9220290
+		summarizeBy: sum
+		sourceColumn: CODPERFECHAMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column NUMEROLOTE
+		dataType: int64
+		formatString: 0
+		lineageTag: 65e52d24-f790-44e1-8baf-b7d4eb959e20
+		summarizeBy: sum
+		sourceColumn: NUMEROLOTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column VLLIQUIDO
+		dataType: double
+		lineageTag: db7477e0-5f27-43fd-8049-09f70ead2b58
+		summarizeBy: sum
+		sourceColumn: VLLIQUIDO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CD_MULTI_EMPRESA
+		dataType: int64
+		formatString: 0
+		lineageTag: 00d01c42-5551-45da-bf8c-0e4c79242493
+		summarizeBy: none
+		sourceColumn: CD_MULTI_EMPRESA
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '2 - LABORATORIO' = m
+		mode: import
+		queryGroup: BD
+		source =
+				let
+				    Fonte = SharePoint.Files("https://imip.sharepoint.com/sites/NIO-Indicadores", [ApiVersion = 15]),
+				    #"Arquivos Ocultos Filtrados1" = Table.SelectRows(Fonte, each [Attributes]?[Hidden]? <> true),
+				    #"Invocar Função Personalizada1" = Table.AddColumn(#"Arquivos Ocultos Filtrados1", "Transformar Arquivo", each #"Transformar Arquivo"([Content])),
+				    #"Colunas Renomeadas1" = Table.RenameColumns(#"Invocar Função Personalizada1", {"Name", "Nome da Origem"}),
+				    #"Outras Colunas Removidas1" = Table.SelectColumns(#"Colunas Renomeadas1", {"Nome da Origem", "Transformar Arquivo"}),
+				    #"Coluna de Tabela Expandida1" = Table.ExpandTableColumn(#"Outras Colunas Removidas1", "Transformar Arquivo", Table.ColumnNames(#"Transformar Arquivo"(#"Arquivo de Amostra"))),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Coluna de Tabela Expandida1",{{"Nome da Origem", type text}, {"SIGLAUNIDADE", type text}, {"CODPOSTO", Int64.Type}, {"DESCRPOSTO", type text}, {"DATACADASTRO", type date}, {"DATACOLETA", type date}, {"REQUISICAO", Int64.Type}, {"CD_PEDIDO", Int64.Type}, {"REQUISICAOAT", Int64.Type}, {"CD_ITEM_PEDIDO", Int64.Type}, {"NUMGUIA", Int64.Type}, {"NOMEPACIENTE", type text}, {"PRONTUARIO", type any}, {"CODCID", type any}, {"DESCRCID", type any}, {"ESTADOPROF", type text}, {"CODPROF", type any}, {"NOMEPROF", type text}, {"SIGLAEXAME", type text}, {"TABELA", type text}, {"CODAMBSUS", Int64.Type}, {"DESCREXAME", type text}, {"LIBERACAOLAUDO", type datetime}, {"CODIGOEMS", Int64.Type}, {"SISTEMAEXTERNO", type text}, {"SOLICITACAOEXTERNA", Int64.Type}, {"CODIGOEXTERNO", Int64.Type}, {"CODSTATUSEXAME", Int64.Type}, {"CODPERFECHAMENTO", Int64.Type}, {"NUMEROLOTE", Int64.Type}, {"VLLIQUIDO", type number}}),
+				    #"Texto Extraído Antes do Delimitador" = Table.TransformColumns(#"Tipo Alterado", {{"Nome da Origem", each Text.BeforeDelimiter(_, "."), type text}}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Texto Extraído Antes do Delimitador",{{"Nome da Origem", "CD_MULTI_EMPRESA"}}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Colunas Renomeadas",{{"CD_MULTI_EMPRESA", Int64.Type}}),
+				    #"Colunas Renomeadas2" = Table.RenameColumns(#"Tipo Alterado1",{{"NOMEPACIENTE", "NM_PACIENTE"}, {"PRONTUARIO", "CD_PACIENTE"}, {"CODPROF", "CD_PRESTADOR"}, {"NOMEPROF", "NM_PRESTADOR"}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Colunas Renomeadas2",null,0,Replacer.ReplaceValue,{"CODAMBSUS"}),
+				    #"Erros Substituídos" = Table.ReplaceErrorValues(#"Valor Substituído", {{"CODAMBSUS", 0}}),
+				    #"Personalização Adicionada" = Table.AddColumn(#"Erros Substituídos", "ZERO", each 0),
+				    #"Colunas Mescladas" = Table.CombineColumns(Table.TransformColumnTypes(#"Personalização Adicionada", {{"ZERO", type text}, {"CODAMBSUS", type text}}, "pt-BR"),{"ZERO", "CODAMBSUS"},Combiner.CombineTextByDelimiter("", QuoteStyle.None),"CD_PROCEDIMENTO"),
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Colunas Mescladas",{{"LIBERACAOLAUDO", type date}})
+				in
+				    #"Tipo Alterado2"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

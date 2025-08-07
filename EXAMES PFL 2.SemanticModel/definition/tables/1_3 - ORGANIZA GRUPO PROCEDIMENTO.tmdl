@@ -1,0 +1,40 @@
+table '1_3 - ORGANIZA GRUPO PROCEDIMENTO'
+	lineageTag: 49acc72a-22ba-45c4-ad00-51f8c366a313
+
+	column CD_GPO_SUBGPO
+		dataType: string
+		lineageTag: b59a8a3d-4f92-41f4-876a-fe50cc733929
+		summarizeBy: none
+		sourceColumn: CD_GPO_SUBGPO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CD_GPO_SUBGPO_ORG
+		dataType: string
+		lineageTag: dac6b956-979b-4fe0-988d-e18b19a489cc
+		summarizeBy: none
+		sourceColumn: CD_GPO_SUBGPO_ORG
+
+		annotation SummarizationSetBy = Automatic
+
+	column DS_ORGANIZA_GRUPO_PROCEDIMENTO
+		dataType: string
+		lineageTag: 7d744f50-93c2-4943-b716-9620e76046f2
+		summarizeBy: none
+		sourceColumn: DS_ORGANIZA_GRUPO_PROCEDIMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '1_3 - ORGANIZA GRUPO PROCEDIMENTO' = m
+		mode: import
+		queryGroup: BD
+		source =
+				let
+				    Fonte = Oracle.Database("5534db.cloudmv.com.br:1523/prd5534.db5534.mv5534vcn.oraclevcn.com", [Query="SELECT#(lf)CONCAT(OGP.CD_GRUPO_PROCEDIMENTO, OGP.CD_SUB_GRUPO_PROCEDIMENTO) AS CD_GPO_SUBGPO#(lf), CONCAT(#(lf)      OGP.CD_GRUPO_PROCEDIMENTO, #(lf)      CONCAT(OGP.CD_SUB_GRUPO_PROCEDIMENTO, #(lf)      OGP.CD_ORGANIZA_GRUPO_PROCEDIMENTO)) AS CD_GPO_SUBGPO_ORG#(lf), OGP.DS_ORGANIZA_GRUPO_PROCEDIMENTO#(lf)#(lf)FROM#(lf)ORGANIZA_GRUPO_PROCEDIMENTOS OGP", HierarchicalNavigation=true])
+				in
+				    Fonte
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
